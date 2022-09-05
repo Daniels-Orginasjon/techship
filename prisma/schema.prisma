@@ -30,3 +30,11 @@ model Reviews {
   product   Products @relation(fields: [productId], references: [id])
   productId Int
 }
+
+model Reviews {
+  id        Int      @id @default(autoincrement())
+  username  String
+  password  String
+  email     String
+  createdAt DateTime @default(now())
+}
