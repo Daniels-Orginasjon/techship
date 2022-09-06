@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { connectDB } from '../../../lib/server/db';
 import { handler } from '../../../middleware/handler';
@@ -7,9 +6,11 @@ import { Prisma } from '@prisma/client';
 type GetData = {
   name: string;
 };
+
 type Error = {
   error: string;
 };
+
 interface Request extends NextApiRequest {
   query: {
     productID: string;
