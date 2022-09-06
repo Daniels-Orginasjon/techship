@@ -2,7 +2,17 @@
  * @type {import('@types/tailwindcss/tailwind-config').TailwindConfig}
  */
 module.exports = {
-  content: ['./pages/**/*.{ts,tsx}', './public/**/*.html'],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./public/**/*.html",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
   plugins: [],
-  theme: {},
+  theme: {
+    extend: {
+      colors: {
+        bluemain: "#006DBE",
+      },
+    },
+  },
 };
