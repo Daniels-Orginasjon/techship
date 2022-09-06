@@ -22,7 +22,7 @@ const Layout = ({ children }: LayoutProps) => {
         <>
             <Head>
                 <title>{thisPage?.name}</title>
-                <link rel="icon" href="./wallah.jfif"></link>
+                <link rel="icon" href="./logoTrans.png"></link>
             </Head>
             <div className='min-h-screen flex flex-col'>
         <Navbar/>

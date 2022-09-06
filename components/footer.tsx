@@ -1,3 +1,4 @@
+import Image from "next/image"
 
 function FooterBar() {
     return (
@@ -6,8 +7,12 @@ function FooterBar() {
             <div className="md:flex md:justify-between">
                 <div className="mb-6 md:mb-0">
                     <a href="./" className="flex items-center">
-            <img src="./logo.png" className="mr-3 h-6 sm:h-9" alt="Logo"/>
-            <img className="self-center whitespace-nowrap dark:text-white mr-3 h-6 pt-2" src='./logoTrans.png'/>
+             <div className="mr-3 h-6 sm:h-9">
+                <Image src="/logo.png" alt="Flowbite Logo" height={529 / 12} width={491 / 12} />
+            </div>
+            <div className="self-center whitespace-nowrap dark:text-white mr-3 h-6 pt-2">
+                <Image src='/logoTrans.png' alt="" height={156 / 5} width={647 / 5} />
+            </div>
                     </a>
                 </div>
                 <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">

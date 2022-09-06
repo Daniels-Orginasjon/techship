@@ -14,8 +14,12 @@ function Navbar() {
 <nav className="bg-white border-gray-200 dark:bg-gray-900">
     <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
         <a href="./" className="flex items-center ">
-            <img src="./logo.png" className="mr-3 h-6 sm:h-9" alt="Flowbite Logo"/>
-            <img className="self-center whitespace-nowrap dark:text-white mr-3 h-6 pt-2" src='./logoTrans.png'/>
+             <div className="mr-3 h-6 sm:h-9">
+                <Image src="/logo.png" alt="Flowbite Logo" height={529 / 12} width={491 / 12} />
+            </div>
+            <div className="self-center whitespace-nowrap dark:text-white mr-3 h-6 pt-1">
+                <Image src='/logoTrans.png' alt="" height={156 / 5} width={647 / 5} />
+            </div>
         </a>
         <form className="flex items-center">   
             <label htmlFor="simple-search" className="sr-only">Search</label>
