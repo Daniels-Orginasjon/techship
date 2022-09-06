@@ -9,8 +9,10 @@ module.exports = {
   ],
   plugins: [],
   theme: {
-    colors: {
-      bluemain: "#006DBE",
+    extends: {
+      colors: {
+        bluemain: "#006DBE",
+      },
     },
   },
 };
