@@ -1,21 +1,20 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import nextConnect from 'next-connect';
+import { NextHandler } from 'next-connect';
 
 export type ErrorResponse = {
   error: string;
 };
-
-export const handler = nextConnect({
+export const errorHandler = {
   onError: (
-    err,
+    err: any,
     req: NextApiRequest,
     res: NextApiResponse<ErrorResponse>,
-    next,
+    next: NextHandler,
   ) => {
-    console.log('err');
+    console.log(err);
     res.status(500).json({ error: 'Server error' });
   },
   onNoMatch: (req: NextApiRequest, res: NextApiResponse) => {
     res.status(404).send('Not found!');
   },
-});
+};

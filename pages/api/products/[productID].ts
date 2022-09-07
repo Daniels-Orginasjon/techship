@@ -1,7 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { connectDB } from '../../../lib/server/db';
-import { handler } from '../../../middleware/handler';
 import { Prisma } from '@prisma/client';
+import nc from 'next-connect';
+import { errorHandler } from '../../../middleware/handler';
+const handler = nc(errorHandler);
 
 type GetData = {
   name: string;
@@ -26,8 +28,13 @@ handler.get(
   ) => {
     // Connection to database
     const { prisma } = await connectDB();
+    if (req.query.productID === undefined)
+      return res.status(500).json({ error: 'productID is not valid' });
     let id: number = Number(req.query.productID);
 
+    if (id === NaN) {
+      return res.status(500).json({ error: 'productID is not valid' });
+    }
     // Gets product where ID from database
     let product = await prisma.products.findFirst({
       where: { id },
