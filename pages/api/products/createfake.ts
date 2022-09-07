@@ -1,8 +1,9 @@
 import { faker } from '@faker-js/faker';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { connectDB } from '../../../lib/server/db';
-import { handler } from '../../../middleware/handler';
-
+import { errorHandler } from '../../../middleware/handler';
+import nc from 'next-connect';
+const handler = nc(errorHandler);
 handler.get(async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const { prisma } = await connectDB();
   for (let i in [...Array(1000)])
