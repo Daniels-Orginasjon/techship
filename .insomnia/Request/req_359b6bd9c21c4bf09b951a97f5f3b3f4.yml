@@ -1,0 +1,26 @@
+_id: req_359b6bd9c21c4bf09b951a97f5f3b3f4
+type: Request
+parentId: fld_f0efc2114b5f4993a2c81fdfbe8ec753
+modified: 1662453756115
+created: 1655117315388
+url: http://localhost:3000/api/products/
+name: Hello
+description: ""
+method: GET
+body:
+  mimeType: application/json
+  text: ""
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_bfe9b61c48254d9fa7f762e4036b88c6
+authentication: {}
+metaSortKey: -1662112455731
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
