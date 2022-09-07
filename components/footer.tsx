@@ -22,6 +22,9 @@ function FooterBar() {
                             <li className="mb-4">
                                 <a href="./" className="hover:underline">TechShip</a>
                             </li>
+                            <li>
+                                <a href="./" className="hover:underline">Donate</a>
+                            </li>
                         </ul>
                     </div>
                     <div>
