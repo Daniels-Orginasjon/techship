@@ -1,13 +1,13 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Products from '../components/products'
+import type { NextPage } from 'next';
+import Product from '../components/product/product';
+import Products from '../components/product/products';
 
 const Home: NextPage = () => {
   return (
     <div>
-      <Products />
+      <Product productID={2} />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
