@@ -16,6 +16,8 @@ model Products {
   content   String?
   image     String?
   productNr String
+  price     Int
+  salePrice Int?
 
   Review Reviews[]
 }
