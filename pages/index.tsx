@@ -5,7 +5,7 @@ import Products from '../components/product/products';
 const Home: NextPage = () => {
   return (
     <div>
-      <Product productID={2} />
+      <Products />
     </div>
   );
 };

@@ -7,7 +7,6 @@ function Product({ productID }: { productID: number }) {
   const [product, setProduct] =
     useState<Prisma.ProductsGetPayload<{ include: { Review: false } }>>();
   const getProduct = useCallback(() => {
-    console.log(URL + 'api/products/' + productID);
     fetch(URL + 'api/products/' + productID)
       .then((res) => {
         if (res.status !== 200) throw res.json();
