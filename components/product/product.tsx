@@ -6,10 +6,11 @@ let URL = process.env.NEXT_PUBLIC_URL;
 function Product({ productID }: { productID: number }) {
   const [product, setProduct] =
     useState<Prisma.ProductsGetPayload<{ include: { Review: false } }>>();
-
   const getProduct = useCallback(() => {
-    fetch(URL + '/api/products/' + productID)
+    console.log(URL + 'api/products/' + productID);
+    fetch(URL + 'api/products/' + productID)
       .then((res) => {
+        if (res.status !== 200) throw res.json();
         return res.json();
       })
       .then(
@@ -18,15 +19,16 @@ function Product({ productID }: { productID: number }) {
         ) => {
           setProduct(product);
         },
-      );
+      )
+      .catch((err) => {
+        console.log(err);
+      });
   }, [productID]);
 
   useEffect(() => {
     getProduct();
   }, [getProduct]);
-
-  console.log(product);
-
+  if (!product) return <div>Loading</div>;
   return (
     <div className="border">
       <div>{product?.title}</div>
