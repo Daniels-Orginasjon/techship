@@ -4,7 +4,7 @@ import Products from '../components/products'
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <div className="min-h-full">
       <Products />
     </div>
   )
