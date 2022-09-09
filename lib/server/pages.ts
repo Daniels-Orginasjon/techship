@@ -6,6 +6,6 @@ export interface Pages {
 export const navPages: Pages[] = [
   { name: 'Club', href: '/Club' },
   { name: 'Ukens Deals', href: '/ukens-deals' },
-  { name: 'Outlett', href: '/Outlett' },
+  { name: 'Outlet', href: '/Outlet' },
   { name: 'Nytt', href: '/nyheter' },
 ];
