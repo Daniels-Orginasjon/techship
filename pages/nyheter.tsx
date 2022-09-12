@@ -1,3 +1,3 @@
-export default function nyheter() {
-    return(<h1>wallah</h1>)
+export default function Nyheter() {
+    return(<div></div>)
 }

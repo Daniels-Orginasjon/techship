@@ -5,13 +5,14 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 
+
 async function createAccount() {
-    const { prisma } = await connectDB();
-    const user = await prisma.user.create({
-        data: {
-            username: `${username}`,
-            password: `${}`,
-            email: `${email}`,
-        }
-    })
+    // const { prisma } = await connectDB();
+    // const user = await prisma.user.create({
+    //     data: {
+    //         username: `${username}`,
+    //         password: `${}`,
+    //         email: `${email}`,
+    //     }
+    // })
 }
