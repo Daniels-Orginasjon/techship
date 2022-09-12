@@ -4,7 +4,7 @@ import {useRouter} from 'next/router'
 import { useState } from 'react';
 
 function Navbar() {
-    const [registerModel, setRegisterModel]=useState<boolean>(true)
+    const [registerModel, setRegisterModel]=useState<boolean>(false)
     const [loginModel, setLoginModel] = useState<boolean>(false)
         let router = useRouter()
     let currentPage = router.pathname
@@ -53,7 +53,7 @@ function Navbar() {
             <ul className="flex flex-row mt-0 text-sm font-medium">
                 {navPages.map((page, i) => {
                     let active= page.name ==thisPage?.name ? "bg-bluemain" : ""
-                    return (<li key={i}><a href={page.href} className={"text-black hover:bg-bluemain px-7 py-2 rounded-md text-sm font-medium hover:text-white" +active}>{page.name}</a></li>)
+                    return (<li key={i}><a href={page.href} className={"text-black hover:bg-bluemain px-7 py-2 border border-0.5 border-gray-500 rounded-md text-sm font-medium hover:text-white" +active}>{page.name}</a></li>)
                 })}
             </ul>
         </div>
