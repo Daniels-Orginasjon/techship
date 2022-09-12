@@ -32,10 +32,10 @@ const Products: NextPage = () => {
     getProducts();
   }, []);
   return (
-    <div>
+    <div className="">
       {products &&
         products.map((product) => (
-          <div key={product.id}>
+          <div key={product.id} className="mb-5">
             <Product productID={product.id} />
           </div>
         ))}
