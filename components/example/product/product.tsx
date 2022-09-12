@@ -19,7 +19,7 @@ const ExampleProduct = ({ product }: ProductProps) => {
       .format(product.price)
       .replace('kr', '')
       .trim() + ',-';
-  let salePrice = null;
+  let salePrice: null | string = null;
   if (product.salePrice !== null) {
     salePrice =
       Intl.NumberFormat('no-NO', {
@@ -32,10 +32,30 @@ const ExampleProduct = ({ product }: ProductProps) => {
         .replace('kr', '')
         .trim() + ',-';
   }
+  let discountPercentage: null | string = null;
+  if (product.salePrice !== null) {
+    if (product.salePrice < product.price) {
+      discountPercentage = (
+        ((product.price - product.salePrice) / product.price) *
+        100
+      ).toFixed(0);
+    }
+  }
+  const addToCart = () => {
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    let item = cart.find((item: any) => item.id === product.id);
+    if (item) {
+      item.quantity++;
+    } else {
+      cart.push({ id: product.id, quantity: 1 });
+    }
+    console.log(cart);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  };
 
   return (
-    <div className="group relative border p-5">
-      <div className="bg-white grid justify-center">
+    <div className="group relative border p-5 hover:bg-gray-100">
+      <div className="grid justify-center">
         <div className="relative w-52">
           <Image
             src={product.image || ''}
@@ -83,6 +103,13 @@ const ExampleProduct = ({ product }: ProductProps) => {
                       {salePrice}
                     </a>
                   </Link>
+                  {discountPercentage !== null && (
+                    <div>
+                      <span className="text-sm text-red-800">
+                        {discountPercentage}%!!! AV
+                      </span>
+                    </div>
+                  )}
                 </span>
               )
             }
@@ -92,6 +119,16 @@ const ExampleProduct = ({ product }: ProductProps) => {
       <div className="p-2 grid grid-cols-1">
         <div className="flex justify-between">
           <p className="mt-1 text-sm text-gray-500">{product.content || ''}</p>
+        </div>
+      </div>
+      <div className="p-2 grid grid-cols-2">
+        <div className="flex justify-start">
+          <button className="bg-slate-200">VIS</button>
+        </div>
+        <div className="flex justify-end">
+          <button onClick={addToCart} className="bg-slate-200">
+            Legg til
+          </button>
         </div>
       </div>
     </div>
