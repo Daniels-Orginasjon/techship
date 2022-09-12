@@ -64,19 +64,16 @@ handler.get(
       res.status(400).json({ error: 'Limit must be positive and not zero' });
       return;
     }
-
     if (offsetNumber < 0) {
       res.status(400).json({ error: 'Offset must be positive' });
       return;
     }
-
-    // limit must be less than 20 to prevent overloading the server
     if (limitNumber > 20) {
       res.status(400).json({ error: 'Limit must be less than 20' });
       return;
     }
     const { prisma } = await connectDB();
-    // check if offset is greater than the number of products in the database
+
     const count = await prisma.products.count();
     if (offsetNumber > count - 1) {
       res
@@ -84,8 +81,7 @@ handler.get(
         .json({ error: 'Offset is greater than the number of products' });
       return;
     }
-    // if offset + limit is greater than the number of products in the database
-    // then limit is set to the number of products in the database - offset
+
     let newlimitNumber = limitNumber;
     if (offsetNumber + limitNumber > count - 1) {
       newlimitNumber = count - offsetNumber;
@@ -102,10 +98,12 @@ handler.get(
     const { sale } = req.query;
     if (sale !== undefined) {
       if (sale === 'true') {
-        products = products.filter((product) => product.salePrice !== null);
+        products = products.filter(
+          (product) =>
+            product.salePrice !== null && product.salePrice < product.price,
+        );
       }
     }
-
     const response: Response = {
       products,
       pagination: {
