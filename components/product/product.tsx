@@ -1,4 +1,5 @@
 import { Prisma } from '@prisma/client';
+import Image from 'next/image';
 import React, { useEffect, useState, useCallback } from 'react';
 
 let URL = process.env.NEXT_PUBLIC_URL;
@@ -27,12 +28,25 @@ function Product({ productID }: { productID: number }) {
   useEffect(() => {
     getProduct();
   }, [getProduct]);
+
   if (!product) return <div>Loading</div>;
   return (
-    <div className="border">
-      <div>{product?.title}</div>
-      <div>{product?.content}</div>
-      <div>{product?.price}</div>
+    <div className="border w-96">
+      <div className="grid grid-cols-3">
+        <div>
+          <Image
+            src="/../public/images/pc.jpg"
+            alt=""
+            width={100}
+            height={100}
+          />
+        </div>
+        <div className="col-span-2">
+          <h1 className="font-bold text-xl">{product?.title}</h1>
+          <h1 className="font-light">{product?.content}</h1>
+          <h1>{product?.price}</h1>
+        </div>
+      </div>
     </div>
   );
 }
