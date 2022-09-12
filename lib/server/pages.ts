@@ -4,8 +4,9 @@ export interface Pages {
 }
 
 export const navPages: Pages[] = [
-  { name: 'Club', href: '/Club' },
+  { name: 'alle produkter', href: '/alle-produkter' },
+  { name: 'Club', href: '/club' },
   { name: 'Ukens Deals', href: '/ukens-deals' },
-  { name: 'Outlet', href: '/Outlet' },
+  { name: 'Outlet', href: '/outlet' },
   { name: 'Nytt', href: '/nyheter' },
 ];
