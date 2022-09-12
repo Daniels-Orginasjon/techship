@@ -31,8 +31,19 @@ export const handler = nextConnect({
 
 interface Request extends NextApiRequest {
   query: {
-    offset: string | string[];
-    limit: string | string[];
+    offset: string | string[] | undefined;
+    limit: string | string[] | undefined;
+
+    // Filters
+    // name?: string | string[];
+    // price?: string | string[];
+    // category?: string | string[];
+    // brand?: string | string[];
+    // rating?: string | string[];
+    // numReviews?: string | string[];
+    //description?: string | string[];
+    //countInStock?: string | string[];
+    sale?: string | string[] | undefined;
   };
 }
 
@@ -77,7 +88,6 @@ handler.get(
     // then limit is set to the number of products in the database - offset
     let newlimitNumber = limitNumber;
     if (offsetNumber + limitNumber > count - 1) {
-      console.log(count - offsetNumber);
       newlimitNumber = count - offsetNumber;
     }
 
@@ -88,6 +98,14 @@ handler.get(
         Review: false,
       },
     });
+
+    const { sale } = req.query;
+    if (sale !== undefined) {
+      if (sale === 'true') {
+        products = products.filter((product) => product.salePrice !== null);
+      }
+    }
+
     const response: Response = {
       products,
       pagination: {
@@ -96,7 +114,6 @@ handler.get(
         limit: limitNumber,
       },
     };
-    // if there are no products in the database
     return res.status(200).send(response);
   },
 );
