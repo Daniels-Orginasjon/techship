@@ -32,7 +32,7 @@ const Products: NextPage = () => {
     getProducts();
   }, []);
   return (
-    <div className="">
+    <div>
       {products &&
         products.map((product) => (
           <div key={product.id} className="mb-5">
