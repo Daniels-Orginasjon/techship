@@ -13,13 +13,18 @@
   },
   "dependencies": {
     "@prisma/client": "^4.3.1",
+    "bcrypt": "^5.0.1",
     "next": "12.2.5",
     "next-connect": "^0.13.0",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/node": "18.7.14",
+    "@types/passport": "^1.0.10",
+    "@types/passport-local": "^1.0.34",
     "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.8",
