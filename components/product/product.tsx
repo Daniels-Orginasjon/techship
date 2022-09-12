@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 import Image from 'next/image';
 import React, { useEffect, useState, useCallback } from 'react';
 
@@ -7,6 +7,7 @@ let URL = process.env.NEXT_PUBLIC_URL;
 function Product({ productID }: { productID: number }) {
   const [product, setProduct] =
     useState<Prisma.ProductsGetPayload<{ include: { Review: false } }>>();
+  const [price, setPrice] = useState('');
   const getProduct = useCallback(() => {
     fetch(URL + 'api/products/' + productID)
       .then((res) => {
@@ -18,6 +19,12 @@ function Product({ productID }: { productID: number }) {
           product: Prisma.ProductsGetPayload<{ include: { Review: false } }>,
         ) => {
           setProduct(product);
+          let enprice = Intl.NumberFormat('no-NO', {
+            currency: 'NOK',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          }).format(product.price);
+          setPrice(enprice + ',-');
         },
       )
       .catch((err) => {
@@ -44,7 +51,7 @@ function Product({ productID }: { productID: number }) {
         <div className="col-span-2">
           <h1 className="font-bold text-xl">{product?.title}</h1>
           <h1 className="font-light">{product?.content}</h1>
-          <h1>{product?.price}</h1>
+          <h1>{price}</h1>
         </div>
       </div>
     </div>
