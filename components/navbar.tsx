@@ -1,7 +1,8 @@
 import { Pages, navPages } from '../lib/server/pages';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import bcrypt from 'bcrypt';
 import Cart from './cart/cart';
 
 function Navbar() {
@@ -20,6 +21,38 @@ function Navbar() {
   function clickRegister() {
     setRegisterModel(!registerModel);
     setLoginModel(!loginModel);
+  }
+
+  function registerUser(e: React.SyntheticEvent) {
+    e.preventDefault();
+    const target = e.target as typeof e.target & {
+      email: { value: string };
+      username: { value: string };
+      createPassword: { value: string };
+      confirmPassword: { value: string };
+    };
+
+    let Datafil = {
+      email: target.email.value,
+      username: target.username.value,
+      createPassword: target.createPassword.value,
+      confirmPassword: target.confirmPassword.value,
+    };
+    fetch('/api/users', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'post',
+      body: JSON.stringify(Datafil),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+      })
+      .then((res) => {
+        console.log(res);
+      });
   }
 
   return (
@@ -74,9 +107,6 @@ function Navbar() {
             </div>
           </form>
           <div className="flex items-center">
-            <div className="mr-2">
-              <Cart />
-            </div>
             <button
               className="text-sm font-medium text-white bg-bluemain hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-500 rounded-lg px-2 py-1 text-center"
               type="button"
@@ -182,7 +212,6 @@ function Navbar() {
                           type="checkbox"
                           value=""
                           className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                          required
                         />
                       </div>
                       <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -255,7 +284,12 @@ function Navbar() {
                 <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
                   Lag Konto
                 </h3>
-                <form className="space-y-6" action="#">
+                <form
+                  className="space-y-6"
+                  action="#"
+                  method="post"
+                  onSubmit={registerUser}
+                >
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                       Din email
@@ -270,11 +304,23 @@ function Navbar() {
                   </div>
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                      Brukernavn
+                    </label>
+                    <input
+                      name="username"
+                      id="username"
+                      type="text"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                      placeholder="obama"
+                    ></input>
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                       Ditt Passord:
                     </label>
                     <input
-                      name="password"
-                      id="password"
+                      name="createPassword"
+                      id="createPassword"
                       type="password"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                       placeholder="••••••••"
@@ -285,8 +331,8 @@ function Navbar() {
                       Skriv Passord Igjen:
                     </label>
                     <input
-                      name="password"
-                      id="password"
+                      name="confirmPassword"
+                      id="confirmPassword"
                       type="password"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                       placeholder="••••••••"
@@ -302,7 +348,7 @@ function Navbar() {
                     type="submit"
                     className="w-full text-white bg-bluemain hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
-                    Pålogg brukeren
+                    Lag brukeren
                   </button>
                 </form>
               </div>
