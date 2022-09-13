@@ -16,7 +16,6 @@ const Layout = ({ children }: LayoutProps) => {
     return item.href.toLowerCase() === currentPage;
   });
 
-  console.log(navPages);
   return (
     <>
       <Head>
