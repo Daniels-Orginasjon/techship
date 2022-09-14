@@ -48,7 +48,7 @@ const Products: NextPage = () => {
   }, [getProducts]);
   return (
     <div>
-      <div>
+      <div className="grid grid-cols-4 gap-1">
         {products &&
           products.map((product) => (
             <div key={product.id} className="mb-5">
@@ -56,11 +56,25 @@ const Products: NextPage = () => {
             </div>
           ))}
       </div>
-      <div>
-        {currentPage > 0 && <button onClick={handlePrevPage}>Tilbake</button>}
-        <h1>{currentPage + 1}</h1>
+      <div className="flex -space-x-px justify-center">
+        {currentPage > 0 && (
+          <button
+            onClick={handlePrevPage}
+            className="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Tilbake
+          </button>
+        )}
+        <h1 className="py-2 px-3 text-blue-600 bg-blue-50 border border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+          {currentPage + 1}
+        </h1>
         {currentPage + 1 < maxPages && (
-          <button onClick={handleNextPage}>Neste</button>
+          <button
+            onClick={handleNextPage}
+            className="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Neste
+          </button>
         )}
       </div>
     </div>

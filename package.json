@@ -39,6 +39,7 @@
     "cypress-fail-on-console-error": "^3.2.1",
     "eslint": "8.23.0",
     "eslint-config-next": "12.2.5",
+    "localstorage-polyfill": "^1.0.1",
     "postcss": "^8.4.16",
     "prisma": "^4.3.1",
     "start-server-and-test": "^1.14.0",

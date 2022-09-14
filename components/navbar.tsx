@@ -1,8 +1,9 @@
-import { Pages, navPages } from "../lib/server/pages";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import React, { useState } from "react";
-import bcrypt from "bcrypt";
+import { Pages, navPages } from '../lib/server/pages';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import bcrypt from 'bcrypt';
+import Cart from './cart/cart';
 
 function Navbar() {
   const [registerModel, setRegisterModel] = useState<boolean>(false);
@@ -37,11 +38,11 @@ function Navbar() {
       createPassword: target.createPassword.value,
       confirmPassword: target.confirmPassword.value,
     };
-    fetch("/api/users", {
+    fetch('/api/users', {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      method: "post",
+      method: 'post',
       body: JSON.stringify(Datafil),
     })
       .then((res) => {
@@ -106,6 +107,9 @@ function Navbar() {
             </div>
           </form>
           <div className="flex items-center">
+            <div className="mr-2">
+              <Cart />
+            </div>
             <button
               className="text-sm font-medium text-white bg-bluemain hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-500 rounded-lg px-2 py-1 text-center"
               type="button"
@@ -121,13 +125,13 @@ function Navbar() {
           <div className="flex items-center">
             <ul className="flex flex-row mt-0 text-sm font-medium">
               {navPages.map((page, i) => {
-                let active = page.name == thisPage?.name ? "bg-bluemain" : "";
+                let active = page.name == thisPage?.name ? 'bg-bluemain' : '';
                 return (
                   <li key={i}>
                     <a
                       href={page.href}
                       className={
-                        "text-black hover:bg-bluemain px-7 py-2 border border-0.5 border-gray-500 rounded-md text-sm font-medium hover:text-white" +
+                        'text-black hover:bg-bluemain px-7 py-2 border border-0.5 border-gray-500 rounded-md text-sm font-medium hover:text-white' +
                         active
                       }
                     >
@@ -231,7 +235,7 @@ function Navbar() {
                     Pålogg brukeren
                   </button>
                   <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-                    Ikke registrert?{" "}
+                    Ikke registrert?{' '}
                     <a
                       onClick={clickRegister}
                       className="text-blue-700 hover:underline dark:text-blue-500"
