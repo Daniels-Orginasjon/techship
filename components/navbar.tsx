@@ -107,6 +107,9 @@ function Navbar() {
             </div>
           </form>
           <div className="flex items-center">
+            <div className="mr-2">
+              <Cart />
+            </div>
             <button
               className="text-sm font-medium text-white bg-bluemain hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-500 rounded-lg px-2 py-1 text-center"
               type="button"
