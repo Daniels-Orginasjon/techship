@@ -48,6 +48,7 @@ export const createUser = async ({
     const newUser = await prisma.user.create({
       data: user,
     });
+    console.log(user);
     return newUser;
   } catch (error) {
     console.error(error);

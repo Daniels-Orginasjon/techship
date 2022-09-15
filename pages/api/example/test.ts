@@ -17,7 +17,6 @@ export interface CreateUserPost extends NextApiRequest {
     confirmPassword: string[] | string | undefined;
   };
 }
-
 handler.post(async (req: CreateUserPost, res: NextApiResponse) => {});
 
 export default handler;
