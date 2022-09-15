@@ -41,6 +41,34 @@ function Navbar() {
       headers: {
         "Content-Type": "application/json",
       },
+      method: "put",
+      body: JSON.stringify(Datafil),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  }
+
+  function loginUser(e: React.SyntheticEvent) {
+    e.preventDefault();
+    const target = e.target as typeof e.target & {
+      email: { value: string };
+      password: { value: string };
+    };
+
+    let Datafil = {
+      email: target.email.value,
+      password: target.password.value,
+    };
+    fetch("/api/users", {
+      headers: {
+        "Content-Type": "application/json",
+      },
       method: "post",
       body: JSON.stringify(Datafil),
     })
@@ -178,7 +206,12 @@ function Navbar() {
                 <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
                   Pålogging
                 </h3>
-                <form className="space-y-6" action="#">
+                <form
+                  className="space-y-6"
+                  action="#"
+                  method="post"
+                  onSubmit={loginUser}
+                >
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                       Din email
@@ -286,7 +319,7 @@ function Navbar() {
                 <form
                   className="space-y-6"
                   action="#"
-                  method="post"
+                  method="put"
                   onSubmit={registerUser}
                 >
                   <div>
