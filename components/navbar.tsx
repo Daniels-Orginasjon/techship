@@ -109,11 +109,6 @@ function Navbar() {
     }
   }
 
-  useEffect(() => {
-    // redirect to home if user is authenticated
-    if (user) Router.push("/example/profile");
-  }, [user]);
-
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
