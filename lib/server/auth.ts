@@ -1,6 +1,6 @@
 import Iron from '@hapi/iron';
 
-export async function createLoginSession(session: any, secret: string) { 
+export async function createLoginSession(session: any, secret: string): Promise<string> { 
     const createdAt = Date.now();
     const obj = { ...session, createdAt };
     console.log(secret);
@@ -8,7 +8,7 @@ export async function createLoginSession(session: any, secret: string) {
     return token;
 }
 
-export async function getLoginSession(token: string, secret: string) { 
+export async function getLoginSession(token: string, secret: string): Promise<any> { 
     const session = await Iron.unseal(token, secret, Iron.defaults);
     const expiresAt = session.createdAt + session.maxAge * 1000;
     

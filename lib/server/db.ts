@@ -94,6 +94,16 @@ export const findUser = async (
   ) {
     throw new Error('No search parameters defined');
   }
+  let include:Prisma.UserSelect = {
+    createdAt: true,
+    email: true,
+    username: true,
+    uniqueId: true,
+    id: true,
+  };
+  if (includePassword) {
+    include.password = true;
+  }
   const user = await prisma.user.findFirst({
     where: {
       username: username,
@@ -101,6 +111,9 @@ export const findUser = async (
       password: password,
       uniqueId: uniqueId,
     },
+    select: {
+      createdAt: true,
+    }
   });
 
   return user;
