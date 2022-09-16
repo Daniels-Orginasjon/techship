@@ -1,27 +1,23 @@
-import bcrypt from "bcrypt"
+import Iron from '@hapi/iron';
 
-import { connectDB } from "./db";
-
-
-function verifyPassword(password:string, hashedPassword:string){
-    return bcrypt.compare(password, hashedPassword)
+export async function createLoginSession(session: any, secret: string): Promise<string> { 
+    const createdAt = Date.now();
+    const obj = { ...session, createdAt };
+    console.log(secret);
+    const token = await Iron.seal(obj, secret, Iron.defaults);
+    return token;
 }
 
-async function getPassword(email:string) {
-    const {prisma}= await connectDB()
-    const user = await prisma.user.findFirst(
-        {
-            where: {
-                email: email
-            },
-            select:{
-                password: true
-            }
-            
-        }
-    )
-    if (!user) throw "Email is incorrect"
-    return user?.password 
-}
+export async function getLoginSession(token: string, secret: string): Promise<any> { 
+    const session = await Iron.unseal(token, secret, Iron.defaults);
+    const expiresAt = session.createdAt + session.maxAge * 1000;
+    
 
-export {verifyPassword, getPassword}
+    if (session.maxAge && Date.now() > expiresAt) {
+
+    throw new Error('Session expired');
+  
+    }
+                                                                                                                                                                                                                                                                                                                                                                                                                            
+  return session;
+}
