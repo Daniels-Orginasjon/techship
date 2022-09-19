@@ -83,36 +83,29 @@ export const findUser = async (
     uniqueId?: string;
   },
   includePassword: boolean = false,
-): Promise<Prisma.UserGetPayload<{}> | null> => {
+): Promise<Prisma.UserGetPayload<{}>   | null> => {
   const { prisma } = await connectDB();
 
   if (
     username !== undefined &&
     email !== undefined &&
-    password !== undefined &&
     uniqueId !== undefined
   ) {
     throw new Error('No search parameters defined');
   }
-  let include:Prisma.UserSelect = {
-    createdAt: true,
-    email: true,
-    username: true,
-    uniqueId: true,
-    id: true,
-  };
-  if (includePassword) {
-    include.password = true;
-  }
   const user = await prisma.user.findFirst({
     where: {
-      username: username,
-      email: email,
-      password: password,
-      uniqueId: uniqueId,
-    },
-    select: {
-      createdAt: true,
+      OR: [
+        {
+          email
+        },
+        {
+          username
+        },
+        {
+          uniqueId
+        }
+      ]
     }
   });
 

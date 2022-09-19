@@ -32,45 +32,15 @@ function Navbar() {
     const target = e.target as typeof e.target & {
       email: { value: string };
       username: { value: string };
-      createPassword: { value: string };
-      confirmPassword: { value: string };
-    };
-
-    let Datafil = {
-      email: target.email.value,
-      username: target.username.value,
-      createPassword: target.createPassword.value,
-      confirmPassword: target.confirmPassword.value,
-    };
-    fetch("/api/user", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "put",
-      body: JSON.stringify(Datafil),
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          return res.json();
-        }
-      })
-      .then((res) => {
-        console.log(res);
-      });
-  }
-
-  function loginUser(e: React.SyntheticEvent) {
-    e.preventDefault();
-    const target = e.target as typeof e.target & {
-      email: { value: string };
       password: { value: string };
     };
 
     let Datafil = {
       email: target.email.value,
+      username: target.username.value,
       password: target.password.value,
     };
-    fetch("/api/users", {
+    fetch("/api/user", {
       headers: {
         "Content-Type": "application/json",
       },

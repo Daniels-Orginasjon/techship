@@ -17,10 +17,10 @@ interface ApiUserPostRequest extends NextApiRequestWithSession {
 const handler = nextConnect()
   .use(auth)
   .get((req: NextApiRequestWithSession, res: NextApiResponseWithSession) => {
-    console.log(req);
     res.json({ user: req.user });
   })
   .post(async (req: ApiUserPostRequest, res: NextApiResponseWithSession) => {
+    console.log(req.body);
     const { username, password, email } =
       req.body as ApiUserPostRequest['body'];
     if (!username || !password || !email) {
