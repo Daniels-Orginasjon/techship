@@ -2,15 +2,15 @@ FROM node:18
 
 ENV PORT 3000
 
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/techship/app
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/techship/app
 
-COPY package*.json /usr/src/app
+COPY package*.json /usr/src/techship/app
 
 RUN npm install
 
-COPY . /usr/src/app/
+COPY . /usr/src/techship/app
 
 EXPOSE 3000
 
