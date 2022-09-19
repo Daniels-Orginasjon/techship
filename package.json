@@ -17,24 +17,30 @@
     "createenvdev": ""
   },
   "dependencies": {
+    "@hapi/iron": "^7.0.0",
     "@prisma/client": "^4.3.1",
     "bcrypt": "^5.0.1",
     "keen-slider": "^6.8.2",
+    "cookie": "^0.5.0",
     "next": "12.2.5",
     "next-connect": "^0.13.0",
-    "passport": "^0.6.0",
+    "passport": "^0.5.3",
     "passport-local": "^1.0.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "swr": "^1.3.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.5.0",
     "@types/bcrypt": "^5.0.0",
+    "@types/cookie": "^0.5.1",
     "@types/node": "18.7.14",
     "@types/passport": "^1.0.10",
     "@types/passport-local": "^1.0.34",
     "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
+    "@types/uuid": "^8.3.4",
     "autoprefixer": "^10.4.8",
     "cypress": "^10.7.0",
     "cypress-fail-on-console-error": "^3.2.1",
