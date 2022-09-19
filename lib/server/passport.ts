@@ -19,8 +19,8 @@ passport.use(
   new LocalStrategy(
     { passReqToCallback: true },
     async (req, username: string, password: string, done) => {
-      const user = await findUser({ username })
-      
+      const user = await findUser({ username, email:username })
+      console.log(user)
       if (!user || !(await validatePassword(password, user.password))) {
         return done(null, false)
       } else {

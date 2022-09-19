@@ -77,15 +77,15 @@ function LoginButton(props: LoginProps): JSX.Element {
             <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
               Pålogging
             </h3>
-            <form className="space-y-6" action="#">
+            <form className="space-y-6" action="#" onSubmit={onLogin}>
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Din email
+                  Ditt brukernavn eller Email
                 </label>
                 <input
-                  name="email"
-                  id="email"
-                  type="email"
+                  name="username"
+                  id="username"
+                  type="text"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   placeholder="example@gmail.com"
                 ></input>

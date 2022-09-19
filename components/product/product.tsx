@@ -1,15 +1,15 @@
-import { Prisma, PrismaClient } from '@prisma/client';
-import Image from 'next/image';
-import React, { useEffect, useState, useCallback } from 'react';
+import { Prisma, PrismaClient } from "@prisma/client";
+import Image from "next/image";
+import React, { useEffect, useState, useCallback } from "react";
 
 let URL = process.env.NEXT_PUBLIC_URL;
 
 function Product({ productID }: { productID: number }) {
   const [product, setProduct] =
     useState<Prisma.ProductsGetPayload<{ include: { Review: false } }>>();
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState("");
   const getProduct = useCallback(() => {
-    fetch(URL + 'api/products/' + productID)
+    fetch(URL + "api/products/" + productID)
       .then((res) => {
         if (res.status !== 200) throw res.json();
         return res.json();
@@ -19,12 +19,12 @@ function Product({ productID }: { productID: number }) {
           product: Prisma.ProductsGetPayload<{ include: { Review: false } }>,
         ) => {
           setProduct(product);
-          let enprice = Intl.NumberFormat('no-NO', {
-            currency: 'NOK',
+          let enprice = Intl.NumberFormat("no-NO", {
+            currency: "NOK",
             minimumFractionDigits: 0,
             maximumFractionDigits: 0,
           }).format(product.price);
-          setPrice(enprice + ',-');
+          setPrice(enprice + ",-");
         },
       )
       .catch((err) => {
@@ -41,12 +41,9 @@ function Product({ productID }: { productID: number }) {
     <div className="border w-96">
       <div className="grid grid-cols-3">
         <div>
-          <Image
-            src="/../public/images/pc.jpg"
-            alt=""
-            width={100}
-            height={100}
-          />
+          {product.image && (
+            <Image src={product?.image} alt="" width={150} height={200} />
+          )}
         </div>
         <div className="col-span-2">
           <h1 className="font-bold text-xl">{product?.title}</h1>
