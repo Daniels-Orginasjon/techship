@@ -48,7 +48,7 @@ const Products: NextPage = () => {
   }, [getProducts]);
   return (
     <div>
-      <div className="grid grid-cols-4 gap-1">
+      <div className="grid gap-2 grid-cols-1 sm:grid-cols-1 lg:grid-cols-4">
         {products &&
           products.map((product) => (
             <div key={product.id} className="mb-5">
