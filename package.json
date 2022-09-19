@@ -19,6 +19,7 @@
   "dependencies": {
     "@prisma/client": "^4.3.1",
     "bcrypt": "^5.0.1",
+    "keen-slider": "^6.8.2",
     "next": "12.2.5",
     "next-connect": "^0.13.0",
     "passport": "^0.6.0",
