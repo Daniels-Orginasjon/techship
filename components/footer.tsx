@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 function FooterBar() {
   return (
     <>
-      <footer className="p-4 bg-white sm:p-6 dark:bg-gray-900 bottom-0 w-full absolute">
+      <footer className="p-4 bg-white sm:p-6 dark:bg-gray-900 bottom-0 w-full relative">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <a href="./" className="flex items-center">
@@ -85,7 +85,7 @@ function FooterBar() {
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2022{" "}
+            © 2022{' '}
             <a href="./" className="hover:underline">
               TechShip™
             </a>
