@@ -42,12 +42,12 @@ export default function SlideShow() {
 
   return (
     <>
-      <div ref={sliderRef} className="keen-slider flex h-52 max-h-screen">
+      <div ref={sliderRef} className="keen-slider max-w-lg">
         <div className="keen-slider__slide">
           <Image
-            src="/../public/images/slideshow/slideshow.png"
+            src="/../public/images/slideshow/Slideshow4.png"
             alt="product"
-            width={2550}
+            width={870}
             height={210}
           />
         </div>
@@ -56,7 +56,7 @@ export default function SlideShow() {
           <Image
             src="/../public/images/slideshow/Slideshow2.png"
             alt="product"
-            width={2550}
+            width={870}
             height={210}
           />
         </div>
@@ -65,7 +65,7 @@ export default function SlideShow() {
           <Image
             src="/../public/images/slideshow/Slideshow3.png"
             alt="product"
-            width={2550}
+            width={870}
             height={210}
           />
         </div>
