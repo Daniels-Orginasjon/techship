@@ -1,17 +1,20 @@
-import { Pages, navPages } from "../lib/server/pages";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import Cart from "./cart/cart";
-import React, { useState, useEffect } from "react";
-import Router from "next/router";
-import { useUser } from "../lib/client/hooks";
-import Login from "./login";
-import Register from "./register";
+import { Pages, navPages } from '../lib/server/pages';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import Cart from './cart/cart';
+import React, { useState, useEffect } from 'react';
+import Router from 'next/router';
+import { useUser } from '../lib/client/hooks';
+import Login from './login';
+import Register from './register';
+import PhoneNav from './phoneNav';
 function Navbar() {
   const [user, { mutate }] = useUser();
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState('');
   const [registerModel, setRegisterModel] = useState<boolean>(false);
+  const [phoneNavModel, setPhoneNavModel] = useState<boolean>(false);
   const [loginModel, setLoginModel] = useState<boolean>(false);
+
   let router = useRouter();
   let currentPage = router.pathname;
 
@@ -27,6 +30,10 @@ function Navbar() {
     setLoginModel(!loginModel);
   }
 
+  function clickNav() {
+    setPhoneNavModel(!phoneNavModel);
+  }
+
   function registerUser(e: React.SyntheticEvent) {
     e.preventDefault();
     const target = e.target as typeof e.target & {
@@ -40,11 +47,11 @@ function Navbar() {
       username: target.username.value,
       password: target.password.value,
     };
-    fetch("/api/user", {
+    fetch('/api/user', {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      method: "post",
+      method: 'post',
       body: JSON.stringify(Datafil),
     })
       .then((res) => {
@@ -56,7 +63,10 @@ function Navbar() {
         console.log(res);
       });
   }
-
+  function hideModal() {
+    setLoginModel(false);
+    setRegisterModel(false);
+  }
   async function onLogin(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
 
@@ -64,9 +74,9 @@ function Navbar() {
       username: e.currentTarget.username.value,
       password: e.currentTarget.password.value,
     };
-    const res = await fetch("/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
 
@@ -75,16 +85,16 @@ function Navbar() {
       // set user to useSWR state
       mutate(userObj);
     } else {
-      setErrorMsg("Incorrect username or password. Try better!");
+      setErrorMsg('Incorrect username or password. Try better!');
     }
   }
 
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
+        <div className="flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5 flex">
           <a href="./" className="flex items-center ">
-            <div className="mr-3 h-6 sm:h-9">
+            <div className="mr-3 py-0">
               <Image
                 src="/logo.png"
                 alt="Flowbite Logo"
@@ -101,7 +111,7 @@ function Navbar() {
               />
             </div>
           </a>
-          <form className="flex items-center" onSubmit={onLogin}>
+          <form className="items-center hidden sm:flex" onSubmit={onLogin}>
             <label htmlFor="simple-search" className="sr-only">
               Search
             </label>
@@ -145,17 +155,39 @@ function Navbar() {
         </div>
       </nav>
       <nav className="bg-gray-50 dark:bg-gray-700">
-        <div className="py-3 px-4 mx-auto max-w-screen-xl md:px-6">
+        <div className="sm:hidden flex flex-row">
+          <button onClick={clickNav}>
+            <svg
+              version="1.1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              x="0px"
+              y="0px"
+              viewBox="0 0 122.88 95.95"
+              xmlSpace="preserve"
+              className="h-5 w-5"
+            >
+              <style type="text/css"></style>
+              <g>
+                <path
+                  className="st0"
+                  d="M8.94,0h105c4.92,0,8.94,4.02,8.94,8.94l0,0c0,4.92-4.02,8.94-8.94,8.94h-105C4.02,17.88,0,13.86,0,8.94l0,0 C0,4.02,4.02,0,8.94,0L8.94,0z M8.94,78.07h105c4.92,0,8.94,4.02,8.94,8.94l0,0c0,4.92-4.02,8.94-8.94,8.94h-105 C4.02,95.95,0,91.93,0,87.01l0,0C0,82.09,4.02,78.07,8.94,78.07L8.94,78.07z M8.94,39.03h105c4.92,0,8.94,4.02,8.94,8.94l0,0 c0,4.92-4.02,8.94-8.94,8.94h-105C4.02,56.91,0,52.89,0,47.97l0,0C0,43.06,4.02,39.03,8.94,39.03L8.94,39.03z"
+                />
+              </g>
+            </svg>
+          </button>
+        </div>
+        <div className="py-3 px-4 mx-auto max-w-screen-xl md:px-6 hidden sm:flex">
           <div className="flex items-center">
             <ul className="flex flex-row mt-0 text-sm font-medium">
               {navPages.map((page, i) => {
-                let active = page.name == thisPage?.name ? "bg-bluemain" : "";
+                let active = page.name == thisPage?.name ? 'bg-bluemain' : '';
                 return (
                   <li key={i}>
                     <a
                       href={page.href}
                       className={
-                        "text-black hover:bg-bluemain px-7 py-2 border border-0.5 border-gray-500 rounded-md text-sm font-medium hover:text-white" +
+                        'text-black hover:bg-bluemain px-7 py-2 border border-0.5 border-gray-500 rounded-md text-sm font-medium hover:text-white' +
                         active
                       }
                     >
@@ -168,11 +200,24 @@ function Navbar() {
           </div>
         </div>
       </nav>
-      {loginModel && (
-        <Login clicklogin={clickLogin} clickregister={clickRegister} />
-      )}
-      {registerModel && (
-        <Register clickregister={clickRegister} registeruser={registerUser} />
+      {(loginModel || registerModel || phoneNavModel) && (
+        <div
+          id="authentication-modal"
+          tabIndex={-1}
+          className=" bg-black bg-opacity-25 overflow-y-auto overflow-x-hidden top-0 left-0 z-50 w-full h-full md:inset-0 min-h-screen md:h-full fixed "
+          onClick={hideModal}
+        >
+          {loginModel && (
+            <Login clicklogin={clickLogin} clickregister={clickRegister} />
+          )}
+          {registerModel && (
+            <Register
+              clickregister={clickRegister}
+              registeruser={registerUser}
+            />
+          )}
+          {phoneNavModel && <PhoneNav clicknav={clickNav} />}
+        </div>
       )}
     </>
   );
