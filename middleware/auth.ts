@@ -1,7 +1,7 @@
 import nextConnect from 'next-connect';
 import passport from '../lib/server/passport';
 import session from '../lib/server/session';
-
+// ISSUE: Should check if env variable IRON_SESSION_SECRET is set and throw error if not.
 const auth = nextConnect()
   .use(
     session({
