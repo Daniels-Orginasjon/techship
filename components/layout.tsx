@@ -24,7 +24,11 @@ const Layout = ({ children }: LayoutProps) => {
       </Head>
       <div className="flex flex-col">
         <Navbar />
-        <div className="min-h-screen">{children}</div>
+        <div className="min-h-screen m-auto">
+          <div className="block ">w</div>
+          <div className="p-4 flex">{children}</div>
+          <div>w</div>
+        </div>
         <div className="relative bottom-0 pt-60">
           <FooterBar />
         </div>
