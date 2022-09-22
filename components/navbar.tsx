@@ -8,13 +8,14 @@ import { useUser } from '../lib/client/hooks';
 import Login from './login';
 import Register from './register';
 import PhoneNav from './phoneNav';
+import { userInfo } from 'os';
 function Navbar() {
   const [user, { mutate }] = useUser();
   const [errorMsg, setErrorMsg] = useState('');
   const [registerModel, setRegisterModel] = useState<boolean>(false);
   const [phoneNavModel, setPhoneNavModel] = useState<boolean>(false);
   const [loginModel, setLoginModel] = useState<boolean>(false);
-
+  const [dropdownOpen, setdropdownOpen] = useState(false);
   let router = useRouter();
   let currentPage = router.pathname;
 
@@ -144,17 +145,75 @@ function Navbar() {
             <div className="mr-2">
               <Cart />
             </div>
-            <button
-              className="text-sm font-medium text-white bg-bluemain hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-500 rounded-lg px-2 py-1 text-center"
-              type="button"
-              onClick={clickLogin}
-            >
-              Login
-            </button>
+            {!user && (
+              <button
+                className="text-sm font-medium text-white bg-bluemain hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-500 rounded-lg px-2 py-1 text-center"
+                type="button"
+                onClick={clickLogin}
+              >
+                Login
+              </button>
+            )}
+            {user && (
+              <div>
+                <button
+                  id="nameButton"
+                  className="btn btn-primary dropdown-toggle flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white"
+                  type="button"
+                  onClick={() => setdropdownOpen(!dropdownOpen)}
+                >
+                  <span className="sr-only">Open user menu</span>
+                  <Image
+                    className="mr-2 w-8 h-8 rounded-full"
+                    src="/pc.jpg"
+                    alt="user photo"
+                    height="30px"
+                    width="30px"
+                  ></Image>
+                  <h1 className="pl-2">{user.username}</h1>
+                  <svg
+                    className="w-4 h-4 mx-1.5"
+                    aria-hidden="true"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    ></path>
+                  </svg>
+                  <span className="caret"></span>
+                </button>
+                {dropdownOpen && (
+                  <div className="absolute z-40 mt-2 rounded border-[.5px] border-light bg-white py-5 shadow-card transition-all border-bluemain">
+                    <a
+                      href="javascript:void(0)"
+                      className="block py-2 px-5 text-base font-semibold text-body-color hover:bg-primary hover:bg-opacity-5 hover:text-primary hover:bg-bluemain"
+                    >
+                      Dashboard
+                    </a>
+                    <a
+                      href="javascript:void(0)"
+                      className="block py-2 px-5 text-base font-semibold text-body-color hover:bg-primary hover:bg-opacity-5 hover:text-primary hover:bg-bluemain"
+                    >
+                      Settings
+                    </a>
+                    <a
+                      href="javascript:void(0)"
+                      className="block py-2 px-5 text-base font-semibold text-body-color hover:bg-primary hover:bg-opacity-5 hover:text-primary hover:bg-bluemain"
+                    >
+                      Logout
+                    </a>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </nav>
-      <nav className="bg-gray-50 dark:bg-gray-700">
+      <nav className="bg-gray-50 dark:bg-gray-700 items-center text-center">
         <div className="sm:hidden flex flex-row">
           <button onClick={clickNav}>
             <svg
@@ -176,6 +235,35 @@ function Navbar() {
               </g>
             </svg>
           </button>
+          <form className="items-center h" onSubmit={onLogin}>
+            <label htmlFor="simple-search" className="sr-only">
+              Search
+            </label>
+            <div className="relative w-full">
+              <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                <svg
+                  aria-hidden="true"
+                  className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <input
+                type="text"
+                id="simple-search"
+                className="bg-gray-50 border border-bluemain text-gray-900 text-sm rounded-lg block w-full pl-10 p-0.5 "
+                placeholder="Søk"
+                required
+              ></input>
+            </div>
+          </form>
         </div>
         <div className="py-3 px-4 mx-auto max-w-screen-xl md:px-6 hidden sm:flex">
           <div className="flex items-center">
@@ -187,7 +275,7 @@ function Navbar() {
                     <a
                       href={page.href}
                       className={
-                        'text-black hover:bg-bluemain px-7 py-2 border border-0.5 border-gray-500 rounded-md text-sm font-medium hover:text-white' +
+                        'text-black hover:bg-bluemain px-7 py-2  rounded-md text-sm font-medium hover:text-white' +
                         active
                       }
                     >
