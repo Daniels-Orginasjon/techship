@@ -8,7 +8,6 @@ import { useUser } from '../lib/client/hooks';
 import Login from './login';
 import Register from './register';
 import PhoneNav from './phoneNav';
-import { userInfo } from 'os';
 function Navbar() {
   const [user, { mutate }] = useUser();
   const [errorMsg, setErrorMsg] = useState('');
@@ -189,19 +188,19 @@ function Navbar() {
                 {dropdownOpen && (
                   <div className="absolute z-40 mt-2 rounded border-[.5px] border-light bg-white py-5 shadow-card transition-all border-bluemain">
                     <a
-                      href="javascript:void(0)"
+                      href="./bruker-info"
                       className="block py-2 px-5 text-base font-semibold text-body-color hover:bg-primary hover:bg-opacity-5 hover:text-primary hover:bg-bluemain"
                     >
                       Dashboard
                     </a>
                     <a
-                      href="javascript:void(0)"
+                      href="./settings"
                       className="block py-2 px-5 text-base font-semibold text-body-color hover:bg-primary hover:bg-opacity-5 hover:text-primary hover:bg-bluemain"
                     >
                       Settings
                     </a>
                     <a
-                      href="javascript:void(0)"
+                      href="./api/logout"
                       className="block py-2 px-5 text-base font-semibold text-body-color hover:bg-primary hover:bg-opacity-5 hover:text-primary hover:bg-bluemain"
                     >
                       Logout
