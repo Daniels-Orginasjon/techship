@@ -28,6 +28,7 @@ function LoginButton(props: LoginProps): JSX.Element {
     if (res.status === 200) {
       const userObj = await res.json();
       // set user to useSWR state
+      props.clicklogin();
       mutate(userObj);
     } else {
       setErrorMsg('Incorrect username or password. Try better!');

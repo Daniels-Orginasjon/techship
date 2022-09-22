@@ -56,6 +56,7 @@ function Navbar() {
     })
       .then((res) => {
         if (res.status === 200) {
+          clickRegister();
           return res.json();
         }
       })
