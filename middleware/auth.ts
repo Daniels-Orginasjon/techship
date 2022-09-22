@@ -1,6 +1,9 @@
 import nextConnect from 'next-connect';
 import passport from '../lib/server/passport';
 import session from '../lib/server/session';
+if (typeof process.env.IRON_SESSION_SECRET === 'undefined') {
+  throw new Error('Envirement variable not set: IRON_SESSION_SECRET');
+}
 
 const auth = nextConnect()
   .use(
