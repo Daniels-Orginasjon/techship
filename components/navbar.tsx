@@ -8,6 +8,7 @@ import { useUser } from '../lib/client/hooks';
 import Login from './login';
 import Register from './register';
 import PhoneNav from './phoneNav';
+import { login } from '../lib/client/methods';
 function Navbar() {
   const [user, { mutate }] = useUser();
   const [errorMsg, setErrorMsg] = useState('');
@@ -33,6 +34,10 @@ function Navbar() {
   function clickNav() {
     setPhoneNavModel(!phoneNavModel);
   }
+  function hideModal() {
+    setLoginModel(false);
+    setRegisterModel(false);
+  }
 
   function registerUser(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -56,16 +61,14 @@ function Navbar() {
     })
       .then((res) => {
         if (res.status === 200) {
+          clickRegister();
+          login(Datafil.username, Datafil.password).then((loginRes) => {});
           return res.json();
         }
       })
       .then((res) => {
         console.log(res);
       });
-  }
-  function hideModal() {
-    setLoginModel(false);
-    setRegisterModel(false);
   }
   async function onLogin(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
@@ -89,6 +92,23 @@ function Navbar() {
     }
   }
 
+  async function clickLogout() {
+    fetch('/api/logout', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'post',
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          window.location.replace('./');
+          return res.json();
+        }
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  }
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -200,8 +220,9 @@ function Navbar() {
                       Settings
                     </a>
                     <a
-                      href="./api/logout"
+                      href="#"
                       className="block py-2 px-5 text-base font-semibold text-body-color hover:bg-primary hover:bg-opacity-5 hover:text-primary hover:bg-bluemain"
+                      onClick={clickLogout}
                     >
                       Logout
                     </a>

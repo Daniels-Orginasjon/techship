@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import { useUser } from '../lib/client/hooks';
 import { forwardRef } from 'react';
+import { login } from '../lib/client/methods';
 
 interface LoginProps {
   clickregister: () => void;
@@ -15,25 +16,18 @@ function LoginButton(props: LoginProps): JSX.Element {
   async function onLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const body = {
-      username: e.currentTarget.username.value,
-      password: e.currentTarget.password.value,
-    };
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-
-    if (res.status === 200) {
-      const userObj = await res.json();
-      // set user to useSWR state
+    let res = await login(
+      e.currentTarget.username.value,
+      e.currentTarget.password.value,
+    );
+    if (res.succesful) {
+      const userObj = res.user;
+      props.clicklogin();
       mutate(userObj);
     } else {
       setErrorMsg('Incorrect username or password. Try better!');
     }
   }
-
   // useEffect(() => {
   //   // redirect to home if user is authenticated
   //   if (user) Router.push("/example/profile");
