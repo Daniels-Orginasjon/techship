@@ -24,10 +24,16 @@ const Layout = ({ children }: LayoutProps) => {
       </Head>
       <div className="flex flex-col">
         <Navbar />
-        <div className="min-h-screen m-auto">
-          <div className="block ">w</div>
-          <div className="p-4 flex">{children}</div>
-          <div>w</div>
+        <div className="grid grid-flow-col min-h-screen m-auto break-words">
+          <div className="max-w-sm xl:w-32 lg:w-36 sm:w-32 w-24">
+            ADSADSADSADSADSADSADSADSADSADSADSADSADSADS
+          </div>
+          <div className="max-w-7xl xl:max-w-5xl lg:max-w-3xl sm:max-w-lg">
+            {children}
+          </div>
+          <div className="max-w-sm xl:w-32 lg:w-36 sm:w-32 w-24">
+            ADSADSADSADSADSADSADSADASDSADSADSADSADSADS
+          </div>
         </div>
         <div className="relative bottom-0 pt-60">
           <FooterBar />
