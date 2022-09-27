@@ -20,7 +20,7 @@ export default function SlideShow() {
           if (mouseOver) return;
           timeout = setTimeout(() => {
             slider.next();
-          }, 5000);
+          }, 3000);
         }
         slider.on('created', () => {
           slider.container.addEventListener('mouseover', () => {
@@ -42,13 +42,13 @@ export default function SlideShow() {
 
   return (
     <>
-      <div ref={sliderRef} className="keen-slider max-w-lg">
+      <div ref={sliderRef} className="keen-slider max-w-full">
         <div className="keen-slider__slide">
           <Image
-            src="/../public/images/slideshow/Slideshow4.png"
+            src="/../public/images/slideshow/Slideshow.png"
             alt="product"
-            width={870}
-            height={210}
+            width={1200}
+            height={310}
           />
         </div>
         <div className="keen-slider__slide">
@@ -56,8 +56,8 @@ export default function SlideShow() {
           <Image
             src="/../public/images/slideshow/Slideshow2.png"
             alt="product"
-            width={870}
-            height={210}
+            width={1200}
+            height={310}
           />
         </div>
         <div className="keen-slider__slide">
@@ -65,8 +65,8 @@ export default function SlideShow() {
           <Image
             src="/../public/images/slideshow/Slideshow3.png"
             alt="product"
-            width={870}
-            height={210}
+            width={1200}
+            height={310}
           />
         </div>
       </div>
