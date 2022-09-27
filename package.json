@@ -14,6 +14,7 @@
     "pdbpull": "prisma db pull",
     "testgui": "start-server-and-test dev 3000 cypress:open",
     "test": "start-server-and-test dev 3000 cypress:run",
+    "dockerupdate": "docker build -t techship . | docker run -dp 3000:3000 -v \"techship-db:/app\" --network techship-app -e DATABASE_URL=mysql://root:secret@techship-sql:3306/shop -e NEXT_PUBLIC_URL=http://localhost:3000/ -e IRON_SESSION_SECRET=thisisa32characterlongsecretthatyouwillneedtochangewhenyoudeploytoproductionbutyoucankeepthisforlocaldevelopment techship",
     "createenvdev": ""
   },
   "dependencies": {
