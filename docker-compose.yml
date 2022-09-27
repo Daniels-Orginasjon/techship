@@ -26,4 +26,5 @@ services:
     ports:
       - 3000:3000
     restart: always
-    
+
+# to keep the container not conflicting with the other projects on the same machine i use volumes

@@ -4,6 +4,8 @@ import { connectDB } from '../../../lib/server/db';
 import { errorHandler } from '../../../middleware/handler';
 import nc from 'next-connect';
 const handler = nc(errorHandler);
+// function to fuck
+
 handler.get(async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const { prisma } = await connectDB();
   for (let i in [...Array(1000)])
