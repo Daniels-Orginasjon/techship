@@ -161,7 +161,7 @@ export const updateUser = async (
  * @param uniqueId
  * @returns {boolean}
  */
-export const deleteUser = async (uniqueId: string): Promise<boolean> => {
+export const deleteUser = async (uniqueId: string) => {
   const { prisma } = await connectDB();
   try {
     await prisma.user.delete({
