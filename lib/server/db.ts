@@ -131,14 +131,21 @@ export const updateUser = async (
   }: {
     username?: string;
     email?: string;
-    password?: string;
+      password?: string;
+      pass: string;
   },
 ): Promise<Prisma.UserGetPayload<{}> | null> => {
+
   const { prisma } = await connectDB();
-  if (username !== undefined && email !== undefined && password !== undefined) {
+  if (username == undefined && email == undefined && password == undefined) {
     throw new Error('No search parameters defined');
   }
   try {
+    if (password) {
+      let pass = await bcrypt.hash(password, 10);
+      password = pass
+    }
+
     const user = await prisma.user.update({
       where: {
         uniqueId: uniqueId,
@@ -161,7 +168,7 @@ export const updateUser = async (
  * @param uniqueId
  * @returns {boolean}
  */
-export const deleteUser = async (uniqueId: string) => {
+export const deleteUser = async (uniqueId: string): Promise<boolean> => {
   const { prisma } = await connectDB();
   try {
     await prisma.user.delete({
