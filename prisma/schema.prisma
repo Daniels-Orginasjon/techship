@@ -16,6 +16,7 @@ model Products {
   content   String?
   image     String?
   productNr String
+  stock     Int
   price     Int
   salePrice Int?
 

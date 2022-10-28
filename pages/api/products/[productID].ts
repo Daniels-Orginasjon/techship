@@ -38,6 +38,7 @@ handler.get(
     // Gets product where ID from database
     let product = await prisma.products.findFirst({
       where: { id },
+      include: {Review: true}
     });
 
     if (product === null) {
