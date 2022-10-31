@@ -11,4 +11,5 @@ jobs:
         env:
           DATABASE_URL: mysql://root:example@host.docker.internal:3306/
           NEXT_PUBLIC_URL: http://localhost:3000/
+          IRON_SESSION_SECRET: 12345678900987654321234567898989898989898989898989898
         run: npm run test
