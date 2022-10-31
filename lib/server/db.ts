@@ -131,14 +131,21 @@ export const updateUser = async (
   }: {
     username?: string;
     email?: string;
-    password?: string;
+      password?: string;
+      pass: string;
   },
 ): Promise<Prisma.UserGetPayload<{}> | null> => {
+
   const { prisma } = await connectDB();
-  if (username !== undefined && email !== undefined && password !== undefined) {
+  if (username == undefined && email == undefined && password == undefined) {
     throw new Error('No search parameters defined');
   }
   try {
+    if (password) {
+      let pass = await bcrypt.hash(password, 10);
+      password = pass
+    }
+
     const user = await prisma.user.update({
       where: {
         uniqueId: uniqueId,
@@ -187,6 +194,49 @@ export const validatePassword = async (
 ): Promise<boolean> => {
   const valid = await bcrypt.compare(password, hash);
   return valid;
+};
+
+export interface CreateReview {
+anmeldelseTitle:string;
+anmeldelseContent:string;
+rating:number;
+productId:number;
+}
+
+/**
+ *
+ * @param {
+ * anmeldelseTitle:string;
+ * anmeldelseContent:string;
+ * rating:number;
+ * productId:number;
+ * } user
+ * @returns {Promise<Prisma.UserGetPayload<{}> | null>}}}
+ */
+
+export const createReview = async ({
+anmeldelseTitle,
+anmeldelseContent,
+rating,
+productId,
+}: CreateReview): Promise<Prisma.UserGetPayload<{}> | null> => {
+  let dateData = new Date();
+  const data = {
+    title: anmeldelseTitle,
+    content: anmeldelseContent,
+    createdAt: dateData,
+    rating: rating,
+    productId: productId,
+  };
+  const { prisma } = await connectDB();
+  try {
+    await prisma.reviews.create({
+      data: data,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
 };
 
 

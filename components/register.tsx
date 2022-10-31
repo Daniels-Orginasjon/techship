@@ -7,7 +7,7 @@ function Register(props: RegisterProps): JSX.Element {
   return (
     <div
       className="p-4 w-full sm:w-1/3 max-w-wd h-full md:h-auto mx-auto"
-      onClick={(e) => {
+      onMouseDown={(e) => {
         e.stopPropagation();
       }}
     >

@@ -36,27 +36,31 @@ function Product({ productID }: { productID: number }) {
     getProduct();
   }, [getProduct]);
 
+  function VisProduct() {}
+
   if (!product) return <div>Loading</div>;
   return (
-    <div className="border min-h-full hover:bg-slate-100">
-      <div className="grid grid-cols-2">
-        <div>
-          {product.image && (
-            <Image
-              src={product?.image}
-              layout="intrinsic"
-              alt=""
-              width={150}
-              height={200}
-            />
-          )}
+    <div className="border w-96">
+      <a href={'http://localhost:3000/product?ProductId=' + product?.id}>
+        <div className="grid grid-cols-3 m-auto">
+          <div>
+            {product.image && (
+              <Image src={product?.image} alt="" width={150} height={200} />
+            )}
+          </div>
+          <div className="col-span-2 m-2">
+            <h1 className="font-bold text-xl">{product?.title}</h1>
+            <h1 className="font-light">{product?.content}</h1>
+            <h1>{price}</h1>
+            <button
+              className="text-sm font-medium text-white bg-bluemain hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-500 rounded-lg px-2 py-1 text-center"
+              type="button"
+            >
+              Vis produktet
+            </button>
+          </div>
         </div>
-        <div className="col-span-1">
-          <h1 className="font-bold text-xl">{product?.title}</h1>
-          <h1 className="font-light">{product?.content}</h1>
-          <h1>{price}</h1>
-        </div>
-      </div>
+      </a>
     </div>
   );
 }

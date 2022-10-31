@@ -13,6 +13,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse<any>) => {
           title: `${faker.vehicle.manufacturer()} ${faker.vehicle.model()}`,
           price: faker.datatype.number({ min: 100, max: 5000000 }),
           productNr: faker.random.words(5),
+          stock: faker.datatype.number({ min: 0, max: 20 }),
           content: `${faker.lorem.paragraph()}`,
           image: faker.image.imageUrl(),
         },

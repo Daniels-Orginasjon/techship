@@ -313,7 +313,7 @@ function Navbar() {
           id="authentication-modal"
           tabIndex={-1}
           className=" bg-black bg-opacity-25 overflow-y-auto overflow-x-hidden top-0 left-0 z-50 w-full h-full md:inset-0 min-h-screen md:h-full fixed "
-          onClick={hideModal}
+          onMouseDown={hideModal}
         >
           {loginModel && (
             <Login clicklogin={clickLogin} clickregister={clickRegister} />
